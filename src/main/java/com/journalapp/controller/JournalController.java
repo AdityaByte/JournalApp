@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.bson.types.ObjectId;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -28,8 +27,6 @@ import com.journalapp.service.UserService;
 @RequestMapping(value = "/journal")
 public class JournalController{
 
-    // @Autowired
-    // private JournalEntryService journalEntryService;
 
     private final JournalEntryService journalEntryService;
 

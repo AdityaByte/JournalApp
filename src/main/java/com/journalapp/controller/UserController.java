@@ -1,10 +1,8 @@
 package com.journalapp.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -24,10 +22,6 @@ import com.journalapp.service.UserService;
 @RequestMapping("/user")
 public class UserController {
     
-    // Here in the spring we don't prefer field injection we prefer constructor injection.
-    // @Autowired
-    // private UserService userService;
-
     private final UserService userService;
 
     UserController(UserService userService) {

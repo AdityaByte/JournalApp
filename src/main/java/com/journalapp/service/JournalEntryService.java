@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +15,6 @@ import com.journalapp.repository.JournalEntryRepository;
 @Service
 public class JournalEntryService {
     
-    // @Autowired
-    // private JournalEntryRepository journalEntryRepository;
-    
-    // @Autowired
-    // private UserService userService;
-
     private final JournalEntryRepository journalEntryRepository;
     private final UserService userService;
 
@@ -39,13 +32,11 @@ public class JournalEntryService {
                 journalEntry.setDate(LocalDate.now());
                 JournalEntry savedEntry = journalEntryRepository.save(journalEntry);
                 user.getJournalEntries().add(savedEntry);
-                //user.setUserName(null); // throw exception null pointer exception 
                 userService.saveUser(user);
                 return savedEntry;
             }
             return null;
         } catch (Exception e) {
-            //System.out.println(e);
             throw new RuntimeException("Something is gone wrong at the server side " , e);
         }
     }

@@ -1,6 +1,5 @@
 package com.journalapp.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +16,7 @@ import com.mongodb.DuplicateKeyException;
 @RequestMapping("/public")
 public class PublicController {
     
-    // @Autowired
-    // private UserService userService;
-
     // Constructor injection 
-
     private final UserService userService;
 
     PublicController(UserService userService){
