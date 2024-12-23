@@ -23,15 +23,15 @@ import com.journalapp.model.User;
 import com.journalapp.service.JournalEntryService;
 import com.journalapp.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping(value = "/journal")
+@Slf4j
 public class JournalController{
 
 
     private final JournalEntryService journalEntryService;
-
-    // @Autowired
-    // private UserService userService;
 
     private final UserService userService;
 
@@ -56,20 +56,6 @@ public class JournalController{
         }
     }
 
-    // Only admin can see all the Journal entries not any user
-    // @GetMapping
-    // public ResponseEntity<List<JournalEntry>> getAllJournal(){
-    //     try{
-    //         List<JournalEntry> journalEntries = journalEntryService.getAll();
-    //         if(journalEntries != null && !journalEntries.isEmpty()){
-    //             return new ResponseEntity<>(journalEntries , HttpStatus.OK);
-    //         }
-    //         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    //     }catch(Exception e){
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
-
     @GetMapping
     public ResponseEntity<List<JournalEntry>> getUserJournal(){
         try{
@@ -82,7 +68,7 @@ public class JournalController{
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         catch(Exception e){
-            System.out.println(e);
+            log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

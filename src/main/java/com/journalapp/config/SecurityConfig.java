@@ -12,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 import com.journalapp.service.UserDetailServiceImpl;
 
 @Configuration
@@ -20,8 +19,11 @@ import com.journalapp.service.UserDetailServiceImpl;
 @Profile("dev")
 public class SecurityConfig{
 
-    @Autowired
-    private UserDetailServiceImpl userDetailServiceImpl;
+    private final UserDetailServiceImpl userDetailServiceImpl;
+
+    SecurityConfig(UserDetailServiceImpl userDetailServiceImpl){
+        this.userDetailServiceImpl = userDetailServiceImpl;
+    }
 
     @Bean
     public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception{
@@ -29,7 +31,7 @@ public class SecurityConfig{
         .requestMatchers("/journal/**" , "/user/**").authenticated() // ** - wildcard pattern
         .requestMatchers("/admin/**").hasRole("ADMIN")
         .anyRequest().permitAll())
-        .csrf(Customizer -> Customizer.disable())
+        .csrf(customizer -> customizer.disable())
         .httpBasic(Customizer.withDefaults())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .build();

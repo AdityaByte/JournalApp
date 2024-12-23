@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +24,7 @@ public class AdminController {
     }
     
     @GetMapping("/all-users")
-    public ResponseEntity<?> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getAllUser();
         if(users != null && !users.isEmpty()){
             return new ResponseEntity<>(users , HttpStatus.OK);
@@ -34,7 +33,7 @@ public class AdminController {
     }
 
     @PostMapping("/create-admin-user")
-    public ResponseEntity<?> createAdmin(@RequestBody User user){
+    public ResponseEntity<User> createAdmin(User user){ // Here we remove the request body and use the simple pojo
         try{
             User savedUser = userService.saveAdmin(user);
             if(savedUser != null){
