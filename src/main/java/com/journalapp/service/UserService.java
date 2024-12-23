@@ -19,11 +19,19 @@ import com.journalapp.repository.UserRepository;
 @Service
 public class UserService {
     
-    @Autowired
-    private UserRepository userRepository;
+    // @Autowired
+    // private UserRepository userRepository;
 
-    @Autowired
-    private JournalEntryService journalEntryService;
+    // @Autowired
+    // private JournalEntryService journalEntryService;
+
+    private final UserRepository userRepository;
+    private final JournalEntryService journalEntryService;
+
+    UserService(UserRepository userRepository, JournalEntryService journalEntryService){
+        this.userRepository = userRepository;
+        this.journalEntryService = journalEntryService;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 

@@ -24,8 +24,17 @@ import com.journalapp.service.UserService;
 @RequestMapping("/user")
 public class UserController {
     
-    @Autowired
-    private UserService userService;
+    // Here in the spring we don't prefer field injection we prefer constructor injection.
+    // @Autowired
+    // private UserService userService;
+
+    private final UserService userService;
+
+    UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+
 
     // @PostMapping
     // public ResponseEntity<User> saveUser(@RequestBody User user){

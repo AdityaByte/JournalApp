@@ -28,11 +28,20 @@ import com.journalapp.service.UserService;
 @RequestMapping(value = "/journal")
 public class JournalController{
 
-    @Autowired
-    private JournalEntryService journalEntryService;
+    // @Autowired
+    // private JournalEntryService journalEntryService;
 
-    @Autowired
-    private UserService userService;
+    private final JournalEntryService journalEntryService;
+
+    // @Autowired
+    // private UserService userService;
+
+    private final UserService userService;
+
+    JournalController(JournalEntryService journalEntryService, UserService userService){
+        this.journalEntryService = journalEntryService;
+        this.userService = userService;
+    }
     
     @PostMapping
     public ResponseEntity<JournalEntry> addJournal(@RequestBody JournalEntry journalEntry){

@@ -17,8 +17,16 @@ import com.mongodb.DuplicateKeyException;
 @RequestMapping("/public")
 public class PublicController {
     
-    @Autowired
-    private UserService userService;
+    // @Autowired
+    // private UserService userService;
+
+    // Constructor injection 
+
+    private final UserService userService;
+
+    PublicController(UserService userService){
+        this.userService = userService;
+    }
 
     @PostMapping("/create-user")
     public ResponseEntity<User> saveUser(@RequestBody User user){

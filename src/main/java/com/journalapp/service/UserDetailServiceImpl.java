@@ -14,8 +14,14 @@ import com.journalapp.repository.UserRepository;
 @Component
 public class UserDetailServiceImpl implements UserDetailsService{
 
-    @Autowired
-    private UserRepository userRepository;
+    // @Autowired
+    // private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+    UserDetailServiceImpl(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

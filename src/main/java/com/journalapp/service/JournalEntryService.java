@@ -16,11 +16,19 @@ import com.journalapp.repository.JournalEntryRepository;
 @Service
 public class JournalEntryService {
     
-    @Autowired
-    private JournalEntryRepository journalEntryRepository;
+    // @Autowired
+    // private JournalEntryRepository journalEntryRepository;
     
-    @Autowired
-    private UserService userService;
+    // @Autowired
+    // private UserService userService;
+
+    private final JournalEntryRepository journalEntryRepository;
+    private final UserService userService;
+
+    JournalEntryService(JournalEntryRepository journalEntryRepository, UserService userService){
+        this.journalEntryRepository = journalEntryRepository;
+        this.userService = userService;
+    }
 
     @Transactional
     public JournalEntry saveJournal(JournalEntry journalEntry , String username){

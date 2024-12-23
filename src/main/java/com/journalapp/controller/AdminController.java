@@ -20,8 +20,14 @@ import com.journalapp.service.UserService;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private UserService userService;
+    // @Autowired
+    // private UserService userService;
+
+    private final UserService userService;
+
+    AdminController(UserService userService){
+        this.userService = userService;
+    }
     
     @GetMapping("/all-users")
     public ResponseEntity<?> getAllUsers(){
