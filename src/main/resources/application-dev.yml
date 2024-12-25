@@ -39,3 +39,10 @@ logging:
 #      journalapp:
 #        service:
 #          UserService: OFF
+
+weather:
+  api:
+    key: 3e9a6ab40bf2b2db2965f05cb4e47724
+    
+python:
+  api: http://localhost:5000

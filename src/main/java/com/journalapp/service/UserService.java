@@ -2,14 +2,22 @@ package com.journalapp.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.journalapp.model.JournalEntry;
 import com.journalapp.model.User;
@@ -21,10 +29,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final JournalEntryService journalEntryService;
 
-    UserService(UserRepository userRepository, JournalEntryService journalEntryService){
+    UserService(UserRepository userRepository, @Lazy JournalEntryService journalEntryService){
         this.userRepository = userRepository;
         this.journalEntryService = journalEntryService;
     }
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${python.api}")
+    private String pythonApiUrl;
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -40,7 +54,7 @@ public class UserService {
         catch(Exception e){
             logger.info("Information - {} " , "error occured");
             logger.warn("Warning" );
-            logger.error("Error");
+            logger.error("Error : {}" , e.getMessage());
             logger.debug("this is the debug");
             logger.trace("this is the trace");
             throw new RuntimeException("Error occured");
@@ -107,6 +121,15 @@ public class UserService {
 
     public User findByUsername(String username){
         return userRepository.findByUserName(username).get();
+    }
+
+    public Object hitPostApi(String data){
+
+        Map<String , String> requestData = Map.of("title" , data);
+        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestData);
+
+        ResponseEntity<?> responseofApi = restTemplate.exchange(pythonApiUrl + "/api", HttpMethod.POST , requestEntity , String.class);
+        return responseofApi;
     }
 
 }

@@ -15,19 +15,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.journalapp.api.WeatherResponse;
 import com.journalapp.model.User;
 import com.journalapp.service.UserService;
+import com.journalapp.service.WeatherService;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     
     private final UserService userService;
+    private final WeatherService weatherService;
 
-    UserController(UserService userService) {
+    UserController(UserService userService , WeatherService weatherService) {
         this.userService = userService;
+        this.weatherService = weatherService;
     }
-
 
 
     // @PostMapping
@@ -45,7 +48,7 @@ public class UserController {
     // }
 
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<User> getUsers(){
         try{
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -103,6 +106,31 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/greeting/{location}")
+    public ResponseEntity<?> greeting(@PathVariable String location){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse response = weatherService.getWeather(location);
+        String greeting = "";
+        if(response == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if(response != null){
+            greeting = "Hi " + authentication.getName() + ", Weather feels like " + response.getMain().getFeelsLike();
+        }
+        return new ResponseEntity<>(greeting , HttpStatus.OK);
+    }
+
+    // If we want to consume a post api or we want to send a request to an api which is accepting post request then
+
+    @GetMapping("/postApiIntegration/{data}")
+    public ResponseEntity<?> postApi(@PathVariable String data){
+        Object response = userService.hitPostApi(data);
+        if(response != null){
+            return new ResponseEntity<>(response , HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,7 @@ public class JournalEntryService {
     private final JournalEntryRepository journalEntryRepository;
     private final UserService userService;
 
-    JournalEntryService(JournalEntryRepository journalEntryRepository, UserService userService){
+    JournalEntryService(JournalEntryRepository journalEntryRepository, @Lazy UserService userService){
         this.journalEntryRepository = journalEntryRepository;
         this.userService = userService;
     }
