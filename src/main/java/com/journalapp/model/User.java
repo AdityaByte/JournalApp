@@ -13,11 +13,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.NonNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Document(collection = "users")
 @Getter
 @Setter
 @Builder
+@ToString
 public class User {
     
     @Id
@@ -27,6 +29,8 @@ public class User {
     private String userName;
     @NonNull
     private String password;
+    private String email;
+    private boolean sentimentAnalysis;
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();
     private List<String> roles;
