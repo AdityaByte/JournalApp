@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 import com.journalapp.model.User;
 
+// Here we learnt about criteria api
 
 @Component
 public class UserRepositoryImpl {

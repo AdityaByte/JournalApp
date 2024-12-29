@@ -1,0 +1,2 @@
+User(id=673df20b0ccd403983786159, userName=abhinav, password=$2a$10$9E7R9QHbPOjvNnqYltN9z.jQjm0UqB8dWWinGVaifQAZeS8YVh4KS, email=abhinav@gmail.com, sentimentAnalysis=true, journalEntries=null, roles=[USER])
+User(id=673df20b0ccd403983786159, userName=abhinav, password=$2a$10$9E7R9QHbPOjvNnqYltN9z.jQjm0UqB8dWWinGVaifQAZeS8YVh4KS, email=abhinav@gmail.com, sentimentAnalysis=true, journalEntries=null, roles=[USER])

@@ -4,6 +4,17 @@ spring:
       database: JournalApp
       uri: mongodb+srv://aditya:aditya@mongoclustor.glkb7.mongodb.net/?retryWrites=true&w=majority&appName=MongoClustor
       auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL}
+    password: ${APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true # auth means it sends credentials for verifying (username,password)
+          starttls: # it means data transaction is in encrypted form thats why port - 587 otherwise it would be 525 (start transport layer security)
+            enable: true
 
   main:
     allow-circular-references: true
