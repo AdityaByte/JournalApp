@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       database: JournalApp
-      uri: mongodb+srv://aditya:aditya@mongoclustor.glkb7.mongodb.net/?retryWrites=true&w=majority&appName=MongoClustor
+      uri: ${MONGODB_URI}
       auto-index-creation: true
 
   main:

@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       database: JournalApp
-      uri: mongodb+srv://aditya:aditya@mongoclustor.glkb7.mongodb.net/?retryWrites=true&w=majority&appName=MongoClustor
+      uri: ${MONGODB_URI}
       auto-index-creation: true
   mail:
     host: smtp.gmail.com
@@ -53,7 +53,8 @@ logging:
 
 weather:
   api:
-    key: 3e9a6ab40bf2b2db2965f05cb4e47724
-    
+    key: ${WEATHER_API}
+
+#    3e9a6ab40bf2b2db2965f05cb4e47724
 python:
   api: http://localhost:5000
